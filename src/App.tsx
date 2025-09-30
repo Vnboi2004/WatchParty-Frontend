@@ -1,5 +1,5 @@
 function App() {
-  return <div className="font-semibold text-red-500">Watch Party</div>;
+  return <div className="text-3xl font-bold">WatchParty</div>;
 }
 
 export default App;
