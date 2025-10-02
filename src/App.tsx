@@ -1,5 +1,11 @@
+import Layout from "./layouts/Layout";
+
 function App() {
-  return <div className="text-3xl font-bold">WatchParty</div>;
+  return (
+    <Layout>
+      <h1>WatchParty</h1>
+    </Layout>
+  );
 }
 
 export default App;
