@@ -2,9 +2,9 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "../layouts/Layout";
 import PrivateRoute from "./PrivateRoute";
-import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Home from "../pages/Home";
 import Room from "../pages/Room";
 
 const AppRoutes = () => {
