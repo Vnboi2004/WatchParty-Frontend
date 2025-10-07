@@ -1,18 +1,31 @@
-import { Link } from "react-router-dom";
-import { Button } from "../shared/components/Button";
-import { Search, User, LogOut } from "lucide-react";
-import Navbar from "../shared/components/Navbar";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Search, User, LogOut, Settings } from "lucide-react";
+import toast from "react-hot-toast";
+import { useAuth } from "../shared/hooks/useAuth";
 
-const Header = () => {
-  const [searchQuery, setSearchQuery] = useState(""); // (mock)
-  const [isLoggedIn] = useState(false); // Mock auth
+export default function Header() {
+  const { isAuthenticated, username, logout } = useAuth();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+    setShowUserMenu(false);
+    toast.success("Đăng xuất thành công!");
+  };
+
+  const handleSettings = () => {
+    setShowUserMenu(false);
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl supports-[backdrop-filter]:bg-zinc-950/80 shadow-2xl shadow-black/20">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
-          {/* Logo & Brand  */}
+          {/* Logo & Brand */}
           <Link
             to="/"
             className="flex items-center gap-3 hover:opacity-90 transition-all duration-300 group"
@@ -36,6 +49,7 @@ const Header = () => {
               </p>
             </div>
           </Link>
+
           {/* Search Bar */}
           <div className="hidden md:flex flex-1 max-w-md mx-8 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-5 h-5" />
@@ -44,51 +58,84 @@ const Header = () => {
               placeholder="Tìm phim, phòng xem..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-md text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent transition-all duration-300"
+              className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent transition-all duration-300"
             />
           </div>
-          
-          {/* Navigation */}
-          <Navbar />
 
-          {/* Auth*/}
-          <div className="flex items-center gap-2">
-            {isLoggedIn ? (
-              // Nếu logged in: Avatar + Logout
-              <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 text-zinc-300 hover:text-white hover:bg-zinc-800/50 rounded-full p-2 transition-all duration-300"
+          {/* Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6 text-md font-medium">
+            <Link
+              to="/"
+              className="text-zinc-300 hover:text-white transition-colors"
+            >
+              Trang chủ
+            </Link>
+            <Link
+              to="/movies"
+              className="text-zinc-300 hover:text-white transition-colors"
+            >
+              Phim
+            </Link>
+            <Link
+              to="/rooms"
+              className="text-zinc-300 hover:text-white transition-colors"
+            >
+              Phòng xem
+            </Link>
+          </nav>
+
+          {/* Auth Section */}
+          <div className="flex items-center gap-3">
+            {isAuthenticated ? (
+              <div className="relative">
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center gap-2 px-4 py-2 bg-zinc-800/50 hover:bg-zinc-800 rounded-full transition-all duration-300 border border-zinc-700"
                 >
-                  <User className="w-5 h-5" />
-                  <span className="hidden sm:inline">Profile</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-zinc-300 hover:text-white hover:bg-zinc-800/50 rounded-full p-2 transition-all duration-300"
-                >
-                  <LogOut className="w-5 h-5" />
-                </Button>
-              </>
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center">
+                    <User className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-white font-medium hidden sm:inline">
+                    {username}
+                  </span>
+                </button>
+
+                {/* Dropdown Menu */}
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-zinc-800 rounded-lg shadow-xl overflow-hidden animate-in slide-in-from-top-2 duration-200">
+                    <div className="px-4 py-3 border-b border-zinc-800">
+                      <p className="text-sm text-zinc-400">Xin chào!</p>
+                      <p className="text-white font-semibold">{username}</p>
+                    </div>
+                    <button
+                      onClick={handleSettings}
+                      className="w-full px-4 py-2 text-left text-zinc-300 hover:bg-zinc-800 hover:text-white transition-colors flex items-center gap-2"
+                    >
+                      <Settings className="w-4 h-4" />
+                      Cài đặt
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full px-4 py-2 text-left text-red-400 hover:bg-zinc-800 hover:text-red-300 transition-colors flex items-center gap-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Đăng xuất
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
-              // Guest: Login/Register
-              <>
-                <Button
-                  size="sm"
-                  className="bg-gradient-to-r from-orange-500 via-red-600 to-pink-600 rounded-full px-4 py-2 text-white font-medium transition-colors hover:opacity-90 gap-2"
-                >
-                  <User className="w-5 h-5" />
-                  Thành Viên
-                </Button>
-              </>
+              <button
+                onClick={() => navigate("/register")}
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 via-red-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-all duration-300 shadow-lg shadow-orange-500/25"
+              >
+                <User className="w-5 h-5" />
+                <span>Thành viên</span>
+              </button>
             )}
           </div>
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

@@ -1,8 +1,4 @@
-interface FooterItem {
-  id: number;
-  title: string;
-  link: string;
-}
+import type { FooterItem } from "../types";
 
 export const QuickLinks: FooterItem[] = [
   { id: 1, title: "Hỏi đáp", link: "/" },
