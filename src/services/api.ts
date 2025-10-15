@@ -3,6 +3,9 @@ import type {
   AuthResponse,
   RegisterRequest,
   LoginRequest,
+  CreateRoomRequest,
+  Room,
+  Movie,
 } from "../shared/types";
 
 const API_BASE_URL =
@@ -40,6 +43,37 @@ class ApiService {
 
   async login(data: LoginRequest): Promise<AuthResponse> {
     const response = await this.api.post<AuthResponse>("/account/login", data);
+    return response.data;
+  }
+
+  //Room endpoints
+  async createRoom(data: CreateRoomRequest): Promise<Room> {
+    const response = await this.api.post<Room>("/room/create", data);
+    return response.data;
+  }
+
+  async getRoomByCode(code: string): Promise<Room> {
+    const response = await this.api.get<Room>(`/room/bycode/${code}`);
+    return response.data;
+  }
+
+  async getActiveRooms(): Promise<Room[]> {
+    const response = await this.api.get<Room[]>("/room/active");
+    return response.data;
+  }
+
+  async getMovies(): Promise<Movie[]> {
+    const response = await this.api.get<Movie[]>("/movies");
+    return response.data;
+  }
+
+  async createMovie(data: {
+    title: string;
+    youTubeId: string;
+    thumbnailUrl?: string;
+    description?: string;
+  }): Promise<Movie> {
+    const response = await this.api.post<Movie>("/movies", data);
     return response.data;
   }
 }
