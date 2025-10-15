@@ -22,7 +22,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl supports-[backdrop-filter]:bg-zinc-950/80 shadow-2xl shadow-black/20">
+    <header className="fixed top-0 z-50 w-full border-b border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl supports-[backdrop-filter]:bg-zinc-950/80 shadow-2xl shadow-black/20">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           {/* Logo & Brand */}
@@ -71,13 +71,13 @@ export default function Header() {
               Trang chủ
             </Link>
             <Link
-              to="/movies"
+              to="/"
               className="text-zinc-300 hover:text-white transition-colors"
             >
               Phim
             </Link>
             <Link
-              to="/rooms"
+              to="/"
               className="text-zinc-300 hover:text-white transition-colors"
             >
               Phòng xem
@@ -126,7 +126,7 @@ export default function Header() {
               </div>
             ) : (
               <button
-                onClick={() => navigate("/register")}
+                onClick={() => navigate("/login")}
                 className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 via-red-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-all duration-300 shadow-lg shadow-orange-500/25"
               >
                 <User className="w-5 h-5" />

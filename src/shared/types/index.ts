@@ -1,3 +1,13 @@
+export interface RegisterRequest {
+  username: string;
+  password: string;
+  email: string;
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
 export interface User {
   id: string;
   username: string;
@@ -15,7 +25,7 @@ export interface Room {
   name: string;
   roomCode: string;
   hostId: string;
-  videoUrl: string;
+  youTubeId: string;
   currentTime: number;
   isPlaying: boolean;
   createdAt: string;
@@ -28,6 +38,10 @@ export interface RoomMember {
   isHost: boolean;
   joinAt: string;
 }
+export interface CreateRoomRequest {
+  name: string;
+  youTubeId: string;
+}
 
 export interface ChatMessage {
   id: string;
@@ -37,27 +51,21 @@ export interface ChatMessage {
   content: string;
   sentAt: string;
 }
-
-export interface CreateRoomRequest {
-  name: string;
-  videoUrl?: string;
+export interface RoomState {
+  youTubeId: string;
+  currentTime: number;
+  isPlaying: boolean;
+  hostId: string;
 }
 
-export interface RegisterRequest {
-  username: string;
-  password: string;
-  email: string;
-}
-
-export interface LoginRequest {
-  username: string;
-  password: string;
-}
-
-export interface FooterItem {
-  id: number;
+export interface Movie {
+  id: string;
   title: string;
-  link: string;
+  youTubeId: string;
+  thumbnailUrl: string;
+  description: string;
+  sourceType: string;
+  createdAt: string;
 }
 
 export interface Video {
@@ -66,4 +74,18 @@ export interface Video {
   thumbnail: string;
   duration: string;
   description: string;
+}
+
+export interface ChatMsg {
+  userId: string;
+  username: string;
+  message: string;
+  isSystem?: boolean;
+  timestamp?: Date;
+}
+
+export interface FooterItem {
+  id: number;
+  title: string;
+  link: string;
 }
