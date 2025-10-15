@@ -22,7 +22,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl supports-[backdrop-filter]:bg-zinc-950/80 shadow-2xl shadow-black/20">
+    <header className="fixed top-0 z-50 w-full border-b border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl supports-[backdrop-filter]:bg-zinc-950/80 shadow-2xl shadow-black/20">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           {/* Logo & Brand */}
@@ -49,40 +49,6 @@ export default function Header() {
               </p>
             </div>
           </Link>
-
-          {/* Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-md mx-8 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Tìm phim, phòng xem..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent transition-all duration-300"
-            />
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-md font-medium">
-            <Link
-              to="/"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Trang chủ
-            </Link>
-            <Link
-              to="/movies"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Phim
-            </Link>
-            <Link
-              to="/rooms"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Phòng xem
-            </Link>
-          </nav>
 
           {/* Auth Section */}
           <div className="flex items-center gap-3">
@@ -126,7 +92,7 @@ export default function Header() {
               </div>
             ) : (
               <button
-                onClick={() => navigate("/register")}
+                onClick={() => navigate("/login")}
                 className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 via-red-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-all duration-300 shadow-lg shadow-orange-500/25"
               >
                 <User className="w-5 h-5" />
