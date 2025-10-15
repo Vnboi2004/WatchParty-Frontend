@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useHome } from "../shared/hooks/useHome";
-import { Clock, Play, Users, VideoIcon, VideoOff } from "lucide-react";
+import { Play, Users, VideoIcon, VideoOff } from "lucide-react";
 
 export default function Home() {
   const {
