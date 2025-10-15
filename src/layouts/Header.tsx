@@ -50,40 +50,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Search Bar */}
-          <div className="hidden md:flex flex-1 max-w-md mx-8 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Tìm phim, phòng xem..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-lg text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent transition-all duration-300"
-            />
-          </div>
-
-          {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-md font-medium">
-            <Link
-              to="/"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Trang chủ
-            </Link>
-            <Link
-              to="/"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Phim
-            </Link>
-            <Link
-              to="/"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Phòng xem
-            </Link>
-          </nav>
-
           {/* Auth Section */}
           <div className="flex items-center gap-3">
             {isAuthenticated ? (
