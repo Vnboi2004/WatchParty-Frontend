@@ -6,10 +6,12 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Room from "../pages/Room";
+import ScrollToTop from "../shared/components/ScrollToTop";
 
 const AppRoutes = () => {
   return (
     <Layout>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
