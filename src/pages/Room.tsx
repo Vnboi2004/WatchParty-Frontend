@@ -13,6 +13,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import ScrollToTopButton from "../shared/components/ScrollToTopButton";
 
 export default function Room() {
   const { roomCode } = useParams<{ roomCode: string }>();
@@ -332,7 +333,7 @@ export default function Room() {
           </div>
         )}
       </div>
+      <ScrollToTopButton />
     </div>
   );
 }
-

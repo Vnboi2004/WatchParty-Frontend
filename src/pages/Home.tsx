@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useHome } from "../shared/hooks/useHome";
 import { Play, Users, VideoIcon, VideoOff } from "lucide-react";
+import ScrollToTopButton from "../shared/components/ScrollToTopButton";
 
 export default function Home() {
   const {
@@ -425,6 +426,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      <ScrollToTopButton />
     </div>
   );
 }
