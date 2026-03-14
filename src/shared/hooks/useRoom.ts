@@ -89,9 +89,8 @@ export const useRoom = (roomCode: string | undefined) => {
       console.log("[useRoom] Component unmounting, cleanup");
       cleanupRoom();
     };
-  }, [roomCode, token]); // ✅ Only depend on roomCode and token
+  }, [roomCode, token]); 
 
-  // ✅ Initialize YouTube Player when container and room are ready
   useEffect(() => {
     console.log("[useRoom] Player init check:", {
       hasContainer: !!playerContainerRef.current,

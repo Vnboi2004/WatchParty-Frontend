@@ -20,6 +20,17 @@ export default function Register() {
     e.preventDefault();
     setError("");
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    if (!emailRegex.test(email)) {
+      setError("Email không hợp lệ. Vui lòng kiểm tra lại!");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Mật khẩu phải có ít nhất 6 ký tự");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Mật khẩu xác nhận không khớp");
       return;
